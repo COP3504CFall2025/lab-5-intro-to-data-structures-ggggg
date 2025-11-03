@@ -47,7 +47,7 @@ public:
 
 
 template<typename T>
-ABQ<T>::ABQ() : capacity_(4), curr_size_(0), array_(new T[capacity_]) {}
+ABQ<T>::ABQ() : capacity_(1), curr_size_(0), array_(new T[capacity_]) {}
 
 template<typename T>
 ABQ<T>::ABQ(const size_t capacity) : capacity_(capacity), curr_size_(0), array_(new T[capacity_]) {}

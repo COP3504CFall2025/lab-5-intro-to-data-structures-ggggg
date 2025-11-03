@@ -47,7 +47,7 @@ public:
 };
 
 template<typename T>
-ABDQ<T>::ABDQ() : data_(new T[4]), capacity_(4), size_(0), front_(0), back_(0) {}
+ABDQ<T>::ABDQ() : data_(new T[1]), capacity_(1), size_(0), front_(0), back_(0) {}
 
 template<typename T>
 ABDQ<T>::ABDQ(const size_t capacity) : data_(new T[capacity]), capacity_(capacity), size_(0), front_(0), back_(0) {}

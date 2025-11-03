@@ -47,7 +47,7 @@ private:
 };
 
 template<typename T>
-ABS<T>::ABS() : capacity_(4), curr_size_(0), array_(new T[capacity_]) {}
+ABS<T>::ABS() : capacity_(1), curr_size_(0), array_(new T[capacity_]) {}
 
 template<typename T>
 ABS<T>::ABS(const size_t capacity) : capacity_(capacity), curr_size_(0), array_(new T[capacity_]) {}
