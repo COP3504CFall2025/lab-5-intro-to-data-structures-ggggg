@@ -119,6 +119,7 @@ void ABQ<T>::enqueue(const T& data) {
     // resize if needed
     if (curr_size_ >= capacity_) {
         int new_capacity = capacity_ * scale_factor_;
+        if (new_capacity < 1) new_capacity = 1;
         T* new_array = new T[new_capacity];
         for (int i = 0; i < curr_size_; i++) {
             new_array[i] = array_[i];
@@ -147,6 +148,18 @@ T ABQ<T>::dequeue() {
     for (int i = 1; i < curr_size_; i++)
         array_[i - 1] = array_[i];
     curr_size_--;
+
+    // sparse case
+    if (curr_size_ <= capacity_ / 4) {
+        int new_capacity = capacity_ / scale_factor_;
+        if (new_capacity < 1) new_capacity = 1;
+        T* new_array = new T[new_capacity];
+        for (int i = 0; i < curr_size_; i++) new_array[i] = array_[i];
+        delete[] array_;
+        array_ = new_array;
+        capacity_ = new_capacity;
+    }
+
     return item;
 }
 

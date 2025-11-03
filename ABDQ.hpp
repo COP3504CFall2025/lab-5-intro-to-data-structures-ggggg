@@ -40,6 +40,7 @@ public:
 
     // Getters
     std::size_t getSize() const noexcept override;
+    std::size_t getMaxCapacity() const noexcept;
 
     void PrintForward() const;
     void PrintReverse() const;
@@ -113,10 +114,16 @@ size_t ABDQ<T>::getSize() const noexcept {
 }
 
 template<typename T>
+size_t ABDQ<T>::getMaxCapacity() const noexcept { 
+    return capacity_; 
+}
+
+template<typename T>
 void ABDQ<T>::pushFront(const T& data) {
     // resize if needed
     if (size_ >= capacity_) {
         int new_capacity = capacity_ * SCALE_FACTOR;
+        if (new_capacity < 1) new_capacity = 1;
         T* new_array = new T[new_capacity];
         for (int i = 0; i < size_; i++) {
             new_array[i] = data_[i];
@@ -138,6 +145,7 @@ void ABDQ<T>::pushBack(const T& data) {
     // resize if needed
     if (size_ >= capacity_) {
         int new_capacity = capacity_ * SCALE_FACTOR;
+        if (new_capacity < 1) new_capacity = 1;
         T* new_array = new T[new_capacity];
         for (int i = 0; i < size_; i++) {
             new_array[i] = data_[i];
@@ -161,6 +169,18 @@ T ABDQ<T>::popFront() {
         data_[i] = data_[i + 1];
     }
     size_--;
+
+    // sparse case
+    if (size_ <= capacity_ / 4) {
+        int new_capacity = capacity_ / SCALE_FACTOR;
+        if (new_capacity < 1) new_capacity = 1;
+        T* new_array = new T[new_capacity];
+        for (int i = 0; i < size_; i++) new_array[i] = data_[i];
+        delete[] data_;
+        data_ = new_array;
+        capacity_ = new_capacity;
+    }
+
     return item;
 }
 
@@ -170,6 +190,18 @@ T ABDQ<T>::popBack() {
         throw std::runtime_error("ABDQ empty");
     T item = data_[size_ - 1];
     size_--;
+
+    // sparse case
+    if (size_ <= capacity_ / 4) {
+        int new_capacity = capacity_ / SCALE_FACTOR;
+        if (new_capacity < 1) new_capacity = 1;
+        T* new_array = new T[new_capacity];
+        for (int i = 0; i < size_; i++) new_array[i] = data_[i];
+        delete[] data_;
+        data_ = new_array;
+        capacity_ = new_capacity;
+    }
+
     return item;
 }
 

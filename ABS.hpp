@@ -119,6 +119,7 @@ void ABS<T>::push(const T& data) {
     // resize if needed
     if (curr_size_ >= capacity_) {
         int new_capacity = capacity_ * scale_factor_;
+        if (new_capacity < 1) new_capacity = 1;
         T* new_array = new T[new_capacity];
         for (int i = 0; i < curr_size_; i++) {
             new_array[i] = array_[i];
@@ -145,6 +146,18 @@ T ABS<T>::pop() {
         throw std::runtime_error("cannot pop empty stack");
     T item = array_[curr_size_ - 1];
     curr_size_--;
+
+    // sparse case
+    if (curr_size_ <= capacity_ / 4) {
+        int new_capacity = capacity_ / scale_factor_;
+        if (new_capacity < 1) new_capacity = 1;
+        T* new_array = new T[new_capacity];
+        for (int i = 0; i < curr_size_; i++) new_array[i] = array_[i];
+        delete[] array_;
+        array_ = new_array;
+        capacity_ = new_capacity;
+    }
+
     return item;
 }
 
