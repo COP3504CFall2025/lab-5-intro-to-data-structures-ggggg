@@ -34,7 +34,7 @@ template <typename T>
 LLQ<T>::LLQ() : list() {}
 
 template <typename T>
-void LLQ<T>::enqueue(const T& item) { list.addTail(item); }
+void LLQ<T>::enqueue(const T& item) { list.AddTail(item); }
 
 template <typename T>
 T LLQ<T>::dequeue() {
@@ -42,7 +42,7 @@ T LLQ<T>::dequeue() {
         throw std::runtime_error("LLQ is empty");
     }
     T item = list.getHead()->data;
-    list.removeHead();
+    list.RemoveHead();
     return item;
 }
 
@@ -61,10 +61,10 @@ std::size_t LLQ<T>::getSize() const noexcept {
 
 template <typename T>
 void LLQ<T>::PrintForward() const {
-    list.printForward();
+    list.PrintForward();
 }
 
 template <typename T>
 void LLQ<T>::PrintReverse() const {
-    list.printReverse();
+    list.PrintReverse();
 }

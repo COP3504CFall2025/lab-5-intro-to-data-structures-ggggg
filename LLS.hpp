@@ -33,7 +33,7 @@ template <typename T>
 LLS<T>::LLS() : list() {}
 
 template <typename T>
-void LLS<T>::push(const T& item) { list.addHead(item); }
+void LLS<T>::push(const T& item) { list.AddHead(item); }
 
 template <typename T>
 T LLS<T>::pop() {
@@ -41,7 +41,7 @@ T LLS<T>::pop() {
         throw std::runtime_error("LLS is empty bro");
     }
     T item = list.getHead()->data;
-    list.removeHead();
+    list.RemoveHead();
     return item;
 }
 
@@ -60,10 +60,10 @@ std::size_t LLS<T>::getSize() const noexcept {
 
 template <typename T>
 void LLS<T>::PrintForward() const {
-    list.printForward();
+    list.PrintForward();
 }
 
 template <typename T>
 void LLS<T>::PrintReverse() const {
-    list.printReverse();
+    list.PrintReverse();
 }

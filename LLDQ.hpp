@@ -40,9 +40,9 @@ template <typename T>
 LLDQ<T>::LLDQ() : list() {}
 
 template <typename T>
-void LLDQ<T>::pushFront(const T& item) { list.addHead(item); }
+void LLDQ<T>::pushFront(const T& item) { list.AddHead(item); }
 template <typename T>
-void LLDQ<T>::pushBack(const T& item) { list.addTail(item); }
+void LLDQ<T>::pushBack(const T& item) { list.AddTail(item); }
 
 template <typename T>
 T LLDQ<T>::popFront() {
@@ -50,7 +50,7 @@ T LLDQ<T>::popFront() {
         throw std::runtime_error("LLDQ is empty");
     }
     T item = list.getHead()->data;
-    list.removeHead();
+    list.RemoveHead();
     return item;
 }
 
@@ -60,7 +60,7 @@ T LLDQ<T>::popBack() {
         throw std::runtime_error("LLDQ is empty");
     }
     T item = list.getTail()->data;
-    list.removeTail();
+    list.RemoveTail();
     return item;
 }
 
@@ -87,10 +87,10 @@ std::size_t LLDQ<T>::getSize() const noexcept {
 
 template <typename T>
 void LLDQ<T>::PrintForward() const {
-    list.printForward();
+    list.PrintForward();
 }
 
 template <typename T>
 void LLDQ<T>::PrintReverse() const {
-    list.printReverse();
+    list.PrintReverse();
 }
