@@ -14,6 +14,7 @@ class LinkedList {
 public:
 	// Behaviors
 	void PrintForward() const;
+    void printForward() const; // scuffed but this is fine :)
 	void PrintReverse() const;
 
 	// Accessors
@@ -30,7 +31,7 @@ public:
 	// Removal
 	bool RemoveHead();
 	bool RemoveTail();
-	void clear();
+	void Clear();
 
 	// Operators
 	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept;
@@ -72,14 +73,14 @@ LinkedList<T>::LinkedList(LinkedList<T>&& other) noexcept : head(other.head), ta
 
 template <typename T>
 LinkedList<T>::~LinkedList() {
-    clear();
+    Clear();
 }
 
 // Operators
 template <typename T>
 LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& rhs) {
     if (this != &rhs) {
-        clear();
+        Clear();
         Node<T>* curr = rhs.head;
         while (curr != nullptr) {
             AddTail(curr->data);
@@ -92,7 +93,7 @@ LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& rhs) {
 template <typename T>
 LinkedList<T>& LinkedList<T>::operator=(LinkedList<T>&& other) noexcept {
     if (this != &other) {
-        clear();
+        Clear();
         head = other.head;
         tail = other.tail;
         count = other.count;
@@ -113,6 +114,17 @@ void LinkedList<T>::PrintForward() const {
     }
     cout << '\n';
 }
+
+template <typename T>
+void LinkedList<T>::printForward() const {
+    Node<T>* curr = head;
+    while (curr != nullptr) {
+        cout << curr->data << " ";
+        curr = curr->next;
+    }
+    cout << '\n';
+}
+
 
 template <typename T>
 void LinkedList<T>::PrintReverse() const {
@@ -193,7 +205,7 @@ bool LinkedList<T>::RemoveTail() {
 }
 
 template <typename T>
-void LinkedList<T>::clear() {
+void LinkedList<T>::Clear() {
     while (head != nullptr) {
         RemoveHead();
     }
